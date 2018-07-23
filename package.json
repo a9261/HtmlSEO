@@ -1,0 +1,42 @@
+{
+  "name": "HtmlSEO",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/lib/htmlseo.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "webpack --progress --colors && node ./dist/entry.bundle.js",
+    "build": "tsc",
+    "test": "mocha -r ts-node/register test/**/*.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "Jaja <jaja.85926@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.5",
+    "awesome-typescript-loader": "^5.2.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "mocha": "^3.5.3",
+    "ts-node": "^7.0.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {}
+}
