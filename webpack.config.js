@@ -26,7 +26,7 @@ config.target = 'async-node';
 config.mode = 'development';
 config.devtool = 'source-map',
 config.entry = {
-    entry:'./lib/htmlseo.ts'
+    entry:'./lib/seoMonkey.js'
 }
 config.output = {
     // path: path.resolve(__dirname, 'dist'),
@@ -42,15 +42,7 @@ config.resolve = {
 // setting
 config.module = {
     rules: [
-        {
-            enforce: "pre",
-            test: /\.js$/,
-            use: ['source-map-loader']
-        }, {
-            test: /\.tsx?$/,
-            exclude: [resolve('node_modules')],
-            use: ['awesome-typescript-loader']
-        }, {
+         {
             test: /\.(js|jsx|mjs)$/,
             exclude: [resolve('node_modules')],
             // include: [path.resolve(__dirname, 'src')],
@@ -58,7 +50,7 @@ config.module = {
                 loader: 'babel-loader',
                 options: {
                     //   presets: ['@babel/preset-env']
-                    presets: ['env', 'react']
+                    presets: ['env']
                 }
             }
         }
