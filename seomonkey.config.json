@@ -1,0 +1,13 @@
+{
+    "MonkeyRules":[
+        {
+            "RuleName": "MonkeyRule1",
+            "SearchRule":"head > title"
+          
+        },
+        {
+            "RuleName":"MonkeyRule2",
+            "SearchRule":"img:not([alt])"
+        }
+    ]
+}
