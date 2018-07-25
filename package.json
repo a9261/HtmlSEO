@@ -8,15 +8,18 @@
     "README.md"
   ],
   "watch": {
-    "test":{
-      "patterns":["lib","test"],
-      "extensions":"js"
+    "test": {
+      "patterns": [
+        "lib",
+        "test"
+      ],
+      "extensions": "js"
     }
   },
   "scripts": {
     "start": "webpack --colors && node ./dist/entry.bundle.js",
     "build": "tsc",
-    "test": "mocha --colors --compilers js:babel-core/register",
+    "test": "mocha --timeout 20000 --colors --compilers js:babel-core/register",
     "watch": "npm-watch test"
   },
   "repository": {
@@ -44,6 +47,7 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "chai-as-promised": "^7.1.1",
     "find-config": "^1.0.0",
     "jsdom": "^11.11.0",
     "watch-run": "^1.2.5"

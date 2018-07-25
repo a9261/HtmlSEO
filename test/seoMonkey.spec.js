@@ -34,16 +34,19 @@ describe('SeoMonkey class Test', () => {
       .inputHtmlFiles
       .push(filePath);
     let result = monkey._detect();
-    
-    return new Promise(function(resolve){
-      result.then((res) => {
-        expect(res[0][0])
-          .to
-          .equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
-          resolve();
-      })
+    result.then(function(val){
+      
+      let msg =val[0][0]; 
+      console.log(msg);
+      expect(msg)
+      .to
+      .equal('MonkeyRule12 are match  1 of elements,Mini:1 Max:1');
+      done();
     })
+    // .catch(function(){done()});
+    .catch(function(err){done(err);});
     
+    // return result[0][0].should.eventually.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
   })
 
   it('Async Execute private _detect,input example stream ,result should have Rule1', (done) => {
@@ -71,8 +74,6 @@ describe('SeoMonkey class Test', () => {
    return monkey
       .saveResultToConsole()
       .then((res) => {
-        console.log('1234');
-        console.log(res);
         expect(res)
           .to
           .equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
