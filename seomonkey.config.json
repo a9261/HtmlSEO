@@ -1,5 +1,5 @@
 {
-    "DetectedText":"This is Regular message , your {RuleName} ",
+    "DetectedText":"{RuleName} are match  {Num} of elements,Mini:{Minimum} Max:{Maximum}",
     "MonkeyRules":[
         {
             "RuleName": "MonkeyRule1",
