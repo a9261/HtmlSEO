@@ -42,13 +42,14 @@ var SeoMonkey = function () {
         key: '_init',
         value: function _init() {
             //Read Config File
+            var data = null;
             try {
-                var data = fs.readFileSync(cfg(this._configFileName, { dir: '/' }));
-                this.config = new _configModel2.default(JSON.parse(data));
+                data = fs.readFileSync(cfg(this._configFileName, { dir: '/' }));
             } catch (error) {
                 // throw new Error(error);
                 throw new Error('Cannot find config file , Monkey is crazy');
             }
+            this.config = new _configModel2.default(data);
         }
     }, {
         key: '_detect',
