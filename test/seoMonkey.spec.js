@@ -140,15 +140,13 @@ describe('SeoMonkey Test ', () => {
     let monkey = new SeoMonkey();
     let filePath = cfg('test.html', {dir: '/test'});
     monkey.inputSource = new HtmlSource(filePath);
-
     monkey.saveResultAsFile('demo.txt')
       .then((res) => {
-        expect(res[0]).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
+        expect(res).to.equal('write to file done');
         done();
       })
       .catch(function (err) {
         done(err);
       });
   })
-  //未寫案例 檢查輸入的內容是否真的為該類型 e.g. 如果輸入的是Html File 那應該內容均為檔案位置，且副檔名為.html
 });

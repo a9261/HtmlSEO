@@ -1,0 +1,6 @@
+MonkeyRule1 are match  1 of elements,Mini:1 Max:1
+MonkeyRule2 are match  0 of elements,Mini:0 Max:2
+MonkeyRule3 are match  0 of elements,Mini:0 Max:1
+MonkeyRule4 are match  0 of elements,Mini:0 Max:1
+MonkeyRule5 are match  0 of elements,Mini:0 Max:15
+MonkeyRule6 are match  1 of elements,Mini:0 Max:1
