@@ -10,3 +10,7 @@ readableStream.on('data',function(chunk){
 readableStream.on('end',function(){
     console.log(data);
 })
+
+let promise = new Promise((resolve)=>{
+    resolve('123')
+})
