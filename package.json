@@ -1,7 +1,7 @@
 {
-  "name": "HtmlSEO",
+  "name": "SeoMonkey",
   "version": "1.0.0",
-  "description": "",
+  "description": "SEO,Monkey,TinyTool",
   "main": "./dist/lib/entry.bundle.js",
   "files": [
     "dist",
@@ -24,15 +24,21 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/a9261/HtmlSEO.git"
   },
-  "keywords": [],
+  "keywords": [ 
+    "html",
+    "parser",
+    "seo",
+    "monkey",
+    "nodejs"
+  ],
   "author": "Jaja <jaja.85926@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/a9261/HtmlSEO/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/a9261/HtmlSEO#readme",
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.5",
@@ -44,12 +50,12 @@
     "clean-webpack-plugin": "^0.1.19",
     "mocha": "^3.5.3",
     "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.0.8",
+    "watch-run": "^1.2.5",
+    "chai-as-promised": "^7.1.1"
   },
   "dependencies": {
-    "chai-as-promised": "^7.1.1",
     "find-config": "^1.0.0",
-    "jsdom": "^11.11.0",
-    "watch-run": "^1.2.5"
+    "jsdom": "^11.11.0"
   }
 }
