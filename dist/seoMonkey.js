@@ -33,12 +33,9 @@ var SeoMonkey = function () {
 
         //Config Parameter
         this.config = null;
-        this.inputHtmlFiles = [];
-        this.inputNodeStreams = [];
         this.inputSource = null;
         this._configFileName = configFileName;
         this._init();
-        this.fullMsg = [];
     }
 
     _createClass(SeoMonkey, [{
