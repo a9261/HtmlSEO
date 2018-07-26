@@ -41,11 +41,7 @@ describe('SeoMonkey Test ', () => {
     let monkey = new SeoMonkey();
     monkey.inputSource = new HtmlSource('test1.html');
     // expect(result).to.equal(false);
-    expect(() => {
-      monkey._detect()
-    })
-      .to
-      .throw('File is not exists');
+    expect(() => { monkey._detect()}).to.throw('File is not exists');
   })
 
   it('5. Befor run private detect function,Wrong stream input will throw exception', () => {
@@ -58,6 +54,7 @@ describe('SeoMonkey Test ', () => {
     let monkey = new SeoMonkey();
     let filePath = cfg('test.html', {dir: '/test'});
     monkey.inputSource = new HtmlSource(filePath);
+
     monkey.inputSource.getSourceData().then((val)=>{
       let hasHtmlTag =val.indexOf('html') > 0;
       expect(hasHtmlTag).to.equal(true);
@@ -70,6 +67,7 @@ describe('SeoMonkey Test ', () => {
     //Full Path and Relative Path..
     let filePath = cfg('test.html', {dir: '/test'});
     monkey.inputSource = new HtmlSource(filePath);
+
     let result = monkey._detect();
     result.then(function (val) {
       let msg = val[0];
@@ -88,6 +86,7 @@ describe('SeoMonkey Test ', () => {
     let filePath = cfg('test.html', {dir: '/test'});
     const readableStream = fs.createReadStream(filePath);
     monkey.inputSource = new StreamSource(readableStream);
+
     let result = monkey._detect();
     result.then((res) => {
       expect(res[0]).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
@@ -102,9 +101,49 @@ describe('SeoMonkey Test ', () => {
     let monkey = new SeoMonkey();
     let filePath = cfg('test.html', {dir: '/test'});
     monkey.inputSource = new HtmlSource(filePath);
+
     monkey.saveResultToConsole()
       .then((res) => {
-        expect(res).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
+        expect(res[0]).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
+        done();
+      })
+      .catch(function (err) {
+        done(err);
+      });
+  })
+
+  it('10. export result to stream, given wrong parameter should throw error', () => {
+    let monkey = new SeoMonkey();
+    let filePath = cfg('test.html', {dir: '/test'});
+    let wrongInput ='';
+    monkey.inputSource = new HtmlSource(filePath);
+
+    expect(() => { monkey.saveResultAsStream(wrongInput) }).to.throw('Only WriteStream can be use');
+  })
+
+  it('11. Async Execute private _detect,input example html file, export result to stream', (done) => {
+    let monkey = new SeoMonkey();
+    let filePath = cfg('test.html', {dir: '/test'});
+    monkey.inputSource = new HtmlSource(filePath);
+
+    let writerStream = fs.createWriteStream('output.txt');
+    monkey.saveResultAsStream(writerStream)
+      .then((res) => {
+        done();
+      })
+      .catch(function (err) {
+        done(err);
+      });
+  })
+
+  it('12. Async Execute private _detect,input example html file, export result to file', (done) => {
+    let monkey = new SeoMonkey();
+    let filePath = cfg('test.html', {dir: '/test'});
+    monkey.inputSource = new HtmlSource(filePath);
+
+    monkey.saveResultAsFile('demo.txt')
+      .then((res) => {
+        expect(res[0]).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
         done();
       })
       .catch(function (err) {
