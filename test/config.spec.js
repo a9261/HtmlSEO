@@ -1,6 +1,5 @@
 import 'mocha';
 import { expect } from 'chai';
-import MonkeyConfig from '../lib/feature/MonkeyConfig'
 
 describe('Config class Test', () => {
 

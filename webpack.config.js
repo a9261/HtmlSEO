@@ -20,20 +20,20 @@ config.optimization = {
     //     }
     // }
 }
-// config.target = 'node';
-config.target = 'async-node';
+config.target = 'node';
+// config.target = 'async-node';
 //Setting Envirnoment
 config.mode = 'development';
 config.devtool = 'source-map',
 config.entry = {
-    entry:'./lib/seoMonkey.js'
+    seoMonkey:'./lib/seoMonkey.js'
 }
 config.output = {
     // path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js',
+    filename: '[name].js',
     // chunkFilename:'[name].js', publicPath: "/assets/"
     publicPath: '',
-    sourceMapFilename: '[file].map'
+    // sourceMapFilename: '[file].map'
 }
 config.resolve = {
     extensions: [".ts", ".tsx", ".jsx", ".js", ".json"]
@@ -43,7 +43,7 @@ config.resolve = {
 config.module = {
     rules: [
          {
-            test: /\.(js|jsx|mjs)$/,
+            test: /\.(js)$/,
             exclude: [resolve('node_modules')],
             // include: [path.resolve(__dirname, 'src')],
             use: {

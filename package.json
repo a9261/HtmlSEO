@@ -1,10 +1,10 @@
 {
-  "name": "SeoMonkey",
-  "version": "1.0.0",
+  "name": "seomonkey",
+  "version": "1.0.6",
   "description": "SEO,Monkey,TinyTool",
-  "main": "./dist/lib/entry.bundle.js",
+  "main": "./dist/seoMonkey.js",
   "files": [
-    "dist",
+    "dist/**/*",
     "README.md"
   ],
   "watch": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "webpack --colors && node ./dist/entry.bundle.js",
-    "build": "tsc",
+    "build": "babel lib -d dist && npm publish",
     "test": "mocha --timeout 20000 --colors --compilers js:babel-core/register",
     "watch": "npm-watch test"
   },
