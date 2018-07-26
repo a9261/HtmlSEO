@@ -149,4 +149,8 @@ describe('SeoMonkey Test ', () => {
         done(err);
       });
   })
+  it('11. Wrong Config content ', () => {
+    
+    expect(function () {new SeoMonkey('fake.config.json');}).to.throw()
+  })
 });

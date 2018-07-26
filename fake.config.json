@@ -1,0 +1,38 @@
+{
+    "DetectedText":"{RuleName} are match  {Num} of elements,Mini:{Minimum} Max:{Maximum}",
+    "MonkeyRules":[
+        {
+            "RuleName": "MonkeyRule1",
+            "SearchRule":"head > title",
+            "Minimum" : 2,
+            "Maximum":1
+            
+        },
+        {
+            "RuleName":"MonkeyRule2",
+            "SearchRule":"img:not([alt])",
+            "Minimum":1,
+            "Maximum":1
+        },
+        {
+            "RuleName":"MonkeyRule3",
+            "SearchRule":"head > meta[name='descriptions']",
+            "Maximum":1
+        },
+        {
+            "RuleName":"MonkeyRule4",
+            "SearchRule":"head > meta[name='keywords']",
+            "Maximum":1
+        },
+        {
+            "RuleName":"MonkeyRule5",
+            "SearchRule":"strong",
+            "Maximum":15
+        },
+        {
+            "RuleName":"MonkeyRule6",
+            "SearchRule":"h1",
+            "Maximum":1
+        }
+    ]
+}
