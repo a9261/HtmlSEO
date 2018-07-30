@@ -1,16 +1,10 @@
 import 'mocha';
 import { expect } from 'chai';
-
-describe('Config class Test', () => {
-
-    // it('after init when config file is not exists,config status should be false', () => {
-    //     const result = new MonkeyConfig().ConfigStatus;
-    //     expect(result).to.equal(false);
-    //   });
-
-    // it('read config file', () => {
-    //   const result = new SeoMonkey().Run();
-    //   expect(result).to.equal('Running');
-    // });
-  
-  });
+import ConfigModel from '../lib/Shared/configModel'
+describe('Config Test', () => {
+    it('1. Give wrong parameter to ConfigModel should throw exception', () => {
+       expect(function(){
+        let config = new ConfigModel('wrong parameter');
+       }).to.throw();
+    })
+});

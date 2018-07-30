@@ -1,12 +1,9 @@
 import 'mocha';
 import {expect, assert} from 'chai';
-import SeoMonkey from '../lib/SeoMonkey'
 import HtmlSource from '../lib/Shared/htmlSource'
 import StreamSource from '../lib/Shared/streamSource'
-import {doesNotReject} from 'assert';
-import {resolve} from 'path';
-const cfg = require('find-config');
-const fs = require('fs');
+import cfg from 'find-config';
+import fs  from 'fs';
 
 describe('Input Source Test', () => {
     it('1. Create HtmlSource with empty parameter should throw exception', () => {
@@ -28,5 +25,31 @@ describe('Input Source Test', () => {
         expect(function () {
             let x =   new StreamSource('a123');
         }).to.throw('Wrong StreamSource')
+    })
+    it('5. Give right parameter for StreamSource should can get right content', (done) => {
+        let filePath = cfg('test.html', {dir: '/test'});
+        const readableStream = fs.createReadStream(filePath);
+        let stream =   new StreamSource(readableStream);
+        stream.getSourceData()
+        .then(val=>{
+            expect(val.indexOf('head') > 0).to.equal(true);
+            done();
+        })
+        .catch(err=>{
+            done(err);
+        })
+    })
+    it('6. Give right parameter for HtmlSource should can get right content', (done) => {
+        let filePath = cfg('test.html', {dir: '/test'});
+        let html =   new HtmlSource(filePath);
+        html.getSourceData()
+        .then((val)=>{
+            expect(val.indexOf('head') > 0).to.equal(true);
+            done();
+        })
+        .catch((err)=>{
+            done(err);
+        })
+        
     })
 })

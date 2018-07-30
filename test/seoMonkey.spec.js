@@ -1,15 +1,23 @@
 import 'mocha';
 import {expect, assert} from 'chai';
+require('mocha-sinon');
 import SeoMonkey from '../lib/SeoMonkey'
 import HtmlSource from '../lib/Shared/htmlSource'
 import StreamSource from '../lib/Shared/streamSource'
-import {doesNotReject} from 'assert';
-import {resolve} from 'path';
-const cfg = require('find-config');
-const fs = require('fs');
+import cfg from 'find-config';
+import fs  from 'fs';
 
 
 describe('SeoMonkey Test', () => {
+
+  //Create Stub
+  beforeEach(function() {
+    var log = console.log;
+    this.sinon.stub(console, 'log').callsFake(function() {
+      // console.log('fake console log');
+      return log.apply(log, arguments);
+    });
+  });
 
   it('1. After new SeoMonkey , if cannot find config will throw exception', () => {
     expect(function () {
@@ -109,12 +117,14 @@ describe('SeoMonkey Test', () => {
 
     monkey.saveResultToConsole()
       .then((res) => {
+        // expect(console.log.calledOnce).to.be.true;
         expect(res[0]).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
         done();
       })
       .catch(function (err) {
         done(err);
       });
+     
   })
 
   it('10. export result to stream, given wrong parameter should throw error', () => {
