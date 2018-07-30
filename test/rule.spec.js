@@ -11,7 +11,7 @@ describe('Rule Test', () => {
        rule = Object.assign(new MonkeyRule(),configRules[0]);
        expect(function(){
             rule.Maximum=-1;
-            rule._valid();
+            rule.valid();
        }).to.throw(`The Rule ${rule.RuleName} Minimum or Maximum cannot less than 0`);
     })
     it('2. Give rule pattern minimum less then 0 should throw exception', () => {
@@ -21,7 +21,7 @@ describe('Rule Test', () => {
         rule = Object.assign(new MonkeyRule(),configRules[0]);
         expect(function(){
              rule.Minimum=-1;
-             rule._valid();
+             rule.valid();
         }).to.throw(`The Rule ${rule.RuleName} Minimum or Maximum cannot less than 0`);
      })
      it('3. Give rule pattern Minimum more than Maximum should throw exception', () => {
@@ -32,7 +32,7 @@ describe('Rule Test', () => {
         expect(function(){
              rule.Minimum=10;
              rule.Maximum=1;
-             rule._valid();
+             rule.valid();
         }).to.throw(`The Rule ${rule.RuleName} Minimum cannot more than Maximum`);
      })
      it('4. Give rule pattern SearchRule empty should throw exception', () => {
@@ -42,7 +42,7 @@ describe('Rule Test', () => {
         rule = Object.assign(new MonkeyRule(),configRules[0]);
         expect(function(){
              rule.SearchRule='';
-             rule._valid();
+             rule.valid();
         }).to.throw(`The Rule ${rule.RuleName} SearchRule cannot empty`);
      })
 });
