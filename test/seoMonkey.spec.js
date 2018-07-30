@@ -8,7 +8,8 @@ import {resolve} from 'path';
 const cfg = require('find-config');
 const fs = require('fs');
 
-describe('SeoMonkey Test ', () => {
+
+describe('SeoMonkey Test', () => {
 
   it('1. After new SeoMonkey , if cannot find config will throw exception', () => {
     expect(function () {
@@ -28,9 +29,9 @@ describe('SeoMonkey Test ', () => {
   })
   it('3. Befor run private detect function,Wrong html input will throw exception', () => {
     let monkey = new SeoMonkey();
-    monkey.inputSource = new HtmlSource('');
     // expect(result).to.equal(false);
     expect(() => {
+      monkey.inputSource = new HtmlSource('');
       monkey._detect()
     })
       .to
@@ -39,15 +40,19 @@ describe('SeoMonkey Test ', () => {
 
   it('4. Befor run private detect function,Wrong html input will throw exception', () => {
     let monkey = new SeoMonkey();
-    monkey.inputSource = new HtmlSource('test1.html');
     // expect(result).to.equal(false);
-    expect(() => { monkey._detect()}).to.throw('File is not exists');
+    expect(() => { 
+      monkey.inputSource = new HtmlSource('test1.html');
+      monkey._detect();
+    }).to.throw('File is not exists');
   })
 
   it('5. Befor run private detect function,Wrong stream input will throw exception', () => {
     let monkey = new SeoMonkey();
-    monkey.inputSource = new StreamSource();
-    expect(() => {monkey._detect()}).to.throw('Wrong StreamSource');
+    expect(() => {
+      monkey.inputSource = new StreamSource('a123');
+      monkey._detect();
+    }).to.throw('Wrong StreamSource');
   })
 
   it('6. Makesure input source can get data', (done) => {
