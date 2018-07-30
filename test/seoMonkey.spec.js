@@ -14,7 +14,6 @@ describe('SeoMonkey Test', () => {
   beforeEach(function() {
     var log = console.log;
     this.sinon.stub(console, 'log').callsFake(function() {
-      // console.log('fake console log');
       return log.apply(log, arguments);
     });
   });
@@ -26,44 +25,39 @@ describe('SeoMonkey Test', () => {
       .to
       .throw()
   })
-  it('2. Befor run private detect function,Empty input will throw exception', () => {
+  it('2. Befor run saveResultToConsole,Empty input will throw exception', () => {
     const monkey = new SeoMonkey();
-    // expect(result).to.equal(false);
     expect(() => {
-      monkey._detect()
-    })
-      .to
-      .throw('Input source is empty');
+      monkey.saveResultToConsole();
+    }).to.throw('Input source is empty');
   })
-  it('3. Befor run private detect function,Wrong html input will throw exception', () => {
+  it('3. Befor run saveResultToConsole,Wrong html input will throw exception', () => {
     let monkey = new SeoMonkey();
-    // expect(result).to.equal(false);
     expect(() => {
       monkey.inputSource = new HtmlSource('');
-      monkey._detect()
+      monkey.saveResultToConsole();
     })
       .to
       .throw('File extension name is not html');
   })
 
-  it('4. Befor run private detect function,Wrong html input will throw exception', () => {
+  it('4. Befor run saveResultToConsole,Wrong html input will throw exception', () => {
     let monkey = new SeoMonkey();
-    // expect(result).to.equal(false);
     expect(() => { 
       monkey.inputSource = new HtmlSource('test1.html');
-      monkey._detect();
+      monkey.saveResultToConsole();
     }).to.throw('File is not exists');
   })
 
-  it('5. Befor run private detect function,Wrong stream input will throw exception', () => {
+  it('5. Befor run saveResultToConsole function,Wrong stream input will throw exception', () => {
     let monkey = new SeoMonkey();
     expect(() => {
       monkey.inputSource = new StreamSource('a123');
-      monkey._detect();
+      monkey.saveResultToConsole();
     }).to.throw('Wrong StreamSource');
   })
 
-  it('6. Makesure input source can get data', (done) => {
+  it('6. Makesure SeoMonkey input source can get data', (done) => {
     let monkey = new SeoMonkey();
     let filePath = cfg('test.html', {dir: '/test'});
     monkey.inputSource = new HtmlSource(filePath);
@@ -75,59 +69,7 @@ describe('SeoMonkey Test', () => {
     }).catch((err)=>{done(err)});
   })
 
-  it('7. Async Execute private _detect,input example html file ,result should have Rule1', (done) => {
-    let monkey = new SeoMonkey();
-    //Full Path and Relative Path..
-    let filePath = cfg('test.html', {dir: '/test'});
-    monkey.inputSource = new HtmlSource(filePath);
-
-    let result = monkey._detect();
-    result.then(function (val) {
-      let msg = val[0];
-      expect(msg).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
-      done();
-    })
-    // .catch(function(){done()}); 錯誤寫法，未帶入err msg 視同pass
-      .catch(function (err) {
-        done(err);
-      });
-  })
-
-  it('8. Async Execute private _detect,input example stream ,result should have Rule1', (done) => {
-    let monkey = new SeoMonkey();
-    //Full Path and Relative Path..
-    let filePath = cfg('test.html', {dir: '/test'});
-    const readableStream = fs.createReadStream(filePath);
-    monkey.inputSource = new StreamSource(readableStream);
-
-    let result = monkey._detect();
-    result.then((res) => {
-      expect(res[0]).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
-      done();
-    })
-      .catch(function (err) {
-        done(err);
-      });
-  })
-
-  it('9. Async Execute private _detect,input example html file, export result to console', (done) => {
-    let monkey = new SeoMonkey();
-    let filePath = cfg('test.html', {dir: '/test'});
-    monkey.inputSource = new HtmlSource(filePath);
-
-    monkey.saveResultToConsole()
-      .then((res) => {
-        // expect(console.log.calledOnce).to.be.true;
-        expect(res[0]).to.equal('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
-        done();
-      })
-      .catch(function (err) {
-        done(err);
-      });
-     
-  })
-
-  it('10. export result to stream, given wrong parameter should throw error', () => {
+  it('7. export result to stream, given wrong parameter should throw error', () => {
     let monkey = new SeoMonkey();
     let filePath = cfg('test.html', {dir: '/test'});
     let wrongInput ='';
@@ -136,7 +78,7 @@ describe('SeoMonkey Test', () => {
     expect(() => { monkey.saveResultAsStream(wrongInput) }).to.throw('Only WriteStream can be use');
   })
 
-  it('11. Async Execute private _detect,input example html file, export result to stream', (done) => {
+  it('8. Async Given right parameter, saveResultAsStream should can export result  ', (done) => {
     let monkey = new SeoMonkey();
     let filePath = cfg('test.html', {dir: '/test'});
     monkey.inputSource = new HtmlSource(filePath);
@@ -151,7 +93,7 @@ describe('SeoMonkey Test', () => {
       });
   })
 
-  it('12. Async Execute private _detect,input example html file, export result to file', (done) => {
+  it('9. Async  Given right parameter, saveResultAsFile should can export result  ', (done) => {
     let monkey = new SeoMonkey();
     let filePath = cfg('test.html', {dir: '/test'});
     monkey.inputSource = new HtmlSource(filePath);
@@ -164,8 +106,7 @@ describe('SeoMonkey Test', () => {
         done(err);
       });
   })
-  it('11. Wrong Config content ', () => {
-    
+  it('10. Wrong Config content should throw exception', () => {
     expect(function () {new SeoMonkey('fake.config.json');}).to.throw()
   })
 });
