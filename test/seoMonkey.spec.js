@@ -1,21 +1,10 @@
 import 'mocha';
 import {expect, assert} from 'chai';
-require('mocha-sinon');
+import sinon from 'sinon'
 import SeoMonkey,{HtmlSource,StreamSource} from '../lib'
 import cfg from 'find-config';
 import fs  from 'fs';
-
-
 describe('SeoMonkey Test', () => {
-
-  //Create Stub
-  beforeEach(function() {
-    var log = console.log;
-    this.sinon.stub(console, 'log').callsFake(function() {
-      return log.apply(log, arguments);
-    });
-  });
-
   it('1. After new SeoMonkey , if cannot find config will throw exception', () => {
     expect(function () {
       new SeoMonkey('money.config');
@@ -104,7 +93,22 @@ describe('SeoMonkey Test', () => {
         done(err);
       });
   })
-  it('10. Wrong Config content should throw exception', () => {
+  it('10. Async  Given right parameter, saveResultToConsole should can export result  ', (done) => {
+    let monkey = new SeoMonkey();
+    let spy = sinon.spy(console,'log');
+    let filePath = cfg('test.html', {dir: '/test'});
+    monkey.inputSource = new HtmlSource(filePath);
+    monkey.saveResultToConsole()
+      .then((res) => {
+        expect(spy.called).to.equal(true);
+        done();
+        spy.restore();
+      })
+      .catch(function (err) {
+        done(err);
+      });
+  })
+  it('11. Wrong Config content should throw exception', () => {
     expect(function () {new SeoMonkey('fake.config.json');}).to.throw()
   })
 });
