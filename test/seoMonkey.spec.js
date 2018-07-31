@@ -2,8 +2,6 @@ import 'mocha';
 import {expect, assert} from 'chai';
 require('mocha-sinon');
 import SeoMonkey,{HtmlSource,StreamSource} from '../lib'
-// import HtmlSource from '../lib'
-// import StreamSource from '../lib'
 import cfg from 'find-config';
 import fs  from 'fs';
 

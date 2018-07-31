@@ -18,8 +18,9 @@
   },
   "scripts": {
     "start": "webpack --colors && node ./dist/entry.bundle.js",
-    "build": "babel lib -d dist && npm publish",
-    "test": "mocha --colors --compilers js:./custom-babel-register.js ",
+    "publish": "babel lib -d dist && npm publish",
+    "build": "babel lib -d dist ",
+    "test": "mocha --colors --compilers js:babel-core/register ",
     "watch": "npm-watch test",
     "bench":"babel lib -d dist && babel benchmark/index.js --out-file benchmark/dist.js && node benchmark/dist.js"
   },
