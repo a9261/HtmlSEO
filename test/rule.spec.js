@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import {MonkeyRule} from '../lib/Shared/configModel'
+import {MonkeyRule} from '../lib'
 import cfg from 'find-config';
 import fs from 'fs';
 describe('Rule Test', () => {

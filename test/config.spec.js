@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import ConfigModel from '../lib/Shared/configModel'
+import ConfigModel from '../lib'
 describe('Config Test', () => {
     it('1. Give wrong parameter to ConfigModel should throw exception', () => {
        expect(function(){

@@ -1,10 +1,18 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _findConfig = require('find-config');
+
+var _findConfig2 = _interopRequireDefault(_findConfig);
+
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
 
 var _detectDr = require('./feature/detectDr');
 
@@ -18,128 +26,107 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var jsdom = require("jsdom");
-var JSDOM = jsdom.JSDOM;
-
-var fs = require('fs');
-var cfg = require('find-config');
-var path = require('path');
+// Symbol for private function
+var _init = Symbol('_init');
+var _detect = Symbol('_detect');
+var _checkSourceIsReady = Symbol('_checkSourceIsReady');
 
 var SeoMonkey = function () {
-    function SeoMonkey() {
-        var configFileName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'seomonkey.config.json';
+  function SeoMonkey() {
+    var configFileName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'seomonkey.config.json';
 
-        _classCallCheck(this, SeoMonkey);
+    _classCallCheck(this, SeoMonkey);
 
-        //Config Parameter
-        this.config = null;
-        this.inputSource = null;
-        this._configFileName = configFileName;
-        this._init();
+    // Config Parameter
+    this.config = null;
+    this.inputSource = null;
+    this._configFileName = configFileName;
+    this[_init]();
+  }
+
+  _createClass(SeoMonkey, [{
+    key: 'saveResultToConsole',
+    value: function saveResultToConsole() {
+      return this[_detect]().then(function (resultMsg) {
+        resultMsg.forEach(function (msg) {
+          console.log(msg);
+        });
+        return resultMsg;
+      });
     }
+  }, {
+    key: 'saveResultAsStream',
+    value: function saveResultAsStream() {
+      var targetStream = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-    _createClass(SeoMonkey, [{
-        key: '_init',
-        value: function _init() {
-            //Read Config File
-            var data = null;
-            try {
-                data = fs.readFileSync(cfg(this._configFileName, { dir: '/' }));
-            } catch (error) {
-                // throw new Error(error);
-                throw new Error('Cannot find config file , Monkey is crazy');
-            }
-            this.config = new _configModel2.default(data);
-        }
-    }, {
-        key: '_detect',
-        value: function _detect() {
-            this._checkSourceIsReady();
-            var dr = new _detectDr2.default(this.config);
-            var result = dr.detect(this.inputSource);
-            return result;
-        }
-    }, {
-        key: '_checkSourceIsReady',
-        value: function _checkSourceIsReady() {
-            if (this.inputSource == null) {
-                throw new Error('Input source is empty');
-            }
-            if (!this.inputSource.isValid) {
-                throw new Error(this.inputSource.errorMsg);
-            }
-        }
-    }, {
-        key: 'saveResultToConsole',
-        value: function saveResultToConsole() {
-            return this._detect().then(function (resultMsg) {
-                resultMsg.forEach(function (msg) {
-                    console.log(msg);
-                });
-                return resultMsg;
-            });
-        }
-    }, {
-        key: 'saveResultAsStream',
-        value: function saveResultAsStream() {
-            var targetStream = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      if (targetStream == null) {
+        throw new Error('Target stream is require');
+      }
+      if (targetStream.constructor !== _fs2.default.WriteStream) {
+        throw new Error('Only WriteStream can be use');
+      }
+      var t = this;
+      return new Promise(function (resolve, reject) {
+        t[_detect]().then(function (resultMsg) {
+          var inputMsg = '';
+          resultMsg.forEach(function (msg) {
+            inputMsg = inputMsg + msg + '\r\n';
+          });
+          targetStream.write(inputMsg, 'UTF8');
+          targetStream.end();
+          targetStream.on('finish', function () {
+            resolve(targetStream);
+          });
+          targetStream.on('error', function (err) {
+            reject(err);
+          });
+        });
+      });
+    }
+  }, {
+    key: 'saveResultAsFile',
+    value: function saveResultAsFile(outputPath) {
+      return this[_detect]().then(function (resultMsg) {
+        var inputMsg = '';
+        resultMsg.forEach(function (msg) {
+          inputMsg = inputMsg + msg + '\r\n';
+        });
+        _fs2.default.writeFileSync(outputPath, inputMsg);
+        return 'write to file done';
+      });
+    }
+    // Set all below  as private function
 
-            if (targetStream == null) {
-                throw new Error('Target stream is require');
-                return;
-            }
-            if (targetStream.constructor != fs.WriteStream) {
-                throw new Error('Only WriteStream can be use');
-                return;
-            }
-            var t = this;
-            return new Promise(function (resolve, reject) {
-                t._detect().then(function (resultMsg) {
-                    var inputMsg = '';
-                    resultMsg.forEach(function (msg) {
-                        inputMsg = inputMsg + msg + '\r\n';
-                    });
-                    targetStream.write(inputMsg, 'UTF8');
-                    targetStream.end();
-                    targetStream.on('finish', function () {
-                        resolve(targetStream);
-                    });
-                    targetStream.on('error', function (err) {
-                        reject(err);
-                    });
-                });
-            });
-        }
-    }, {
-        key: 'saveResultAsFile',
-        value: function saveResultAsFile(outputPath) {
-            return this._detect().then(function (resultMsg) {
-                var inputMsg = '';
-                resultMsg.forEach(function (msg) {
-                    inputMsg = inputMsg + msg + '\r\n';
-                });
-                fs.writeFileSync(outputPath, inputMsg);
-                return 'write to file done';
-            });
-        }
-    }, {
-        key: '_chkDirectory',
-        value: function _chkDirectory(path) {
+  }, {
+    key: _init,
+    value: function value() {
+      // Read Config File
+      var data = null;
+      try {
+        data = _fs2.default.readFileSync((0, _findConfig2.default)(this._configFileName, { dir: '/' }));
+      } catch (error) {
+        throw new Error('Cannot find config file , Monkey is crazy');
+      }
+      this.config = new _configModel2.default(data);
+    }
+  }, {
+    key: _detect,
+    value: function value() {
+      this[_checkSourceIsReady]();
+      var dr = new _detectDr2.default(this.config);
+      var result = dr.detect(this.inputSource);
+      return result;
+    }
+  }, {
+    key: _checkSourceIsReady,
+    value: function value() {
+      if (this.inputSource == null) {
+        throw new Error('Input source is empty');
+      }
+    }
+  }]);
 
-            return new Promise(function (resolve, reject) {
-                fs.stat(path, function (err, stats) {
-                    if (err && err.errno === 34) {
-                        fs.mkdir(path);
-                        resolve();
-                    } else {
-                        reject('path is wrong');
-                    }
-                });
-            });
-        }
-    }]);
-
-    return SeoMonkey;
+  return SeoMonkey;
 }();
 
 exports.default = SeoMonkey;

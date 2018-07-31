@@ -1,0 +1,12 @@
+#Create SeoMonkey everytime
+Console output test x 182 ops/sec ±3.95% (64 runs sampled)
+saveResultAsFile test x 229 ops/sec ±3.51% (74 runs sampled)
+saveResultAsStream test x 241 ops/sec ±4.13% (70 runs sampled)
+Fastest is saveResultAsStream test
+
+
+#Create SeoMonkey once
+Console output test x 210 ops/sec ±3.83% (69 runs sampled)
+saveResultAsFile test x 265 ops/sec ±3.51% (71 runs sampled)
+saveResultAsStream test x 270 ops/sec ±4.15% (73 runs sampled)
+Fastest is saveResultAsStream test

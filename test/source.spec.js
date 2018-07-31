@@ -1,7 +1,6 @@
 import 'mocha';
-import {expect, assert} from 'chai';
-import HtmlSource from '../lib/Shared/htmlSource'
-import StreamSource from '../lib/Shared/streamSource'
+import {expect} from 'chai';
+import {HtmlSource,StreamSource} from '../lib'
 import cfg from 'find-config';
 import fs  from 'fs';
 
