@@ -1,4 +1,19 @@
 SeoMonkey
+
+<div align="center">
+  <a href="https://badge.fury.io/js/seomonkey">
+    <img src="https://badge.fury.io/js/seomonkey.svg" alt="npm version" height="18">
+  </a>
+  <a href="https://travis-ci.org/a9261/HtmlSEO">
+    <img src="https://travis-ci.org/a9261/HtmlSEO.svg?branch=master" alt="Travis CI" />
+  </a>
+  <a href='https://coveralls.io/github/a9261/HtmlSEO?branch=master'>
+    <img src='https://coveralls.io/repos/github/a9261/HtmlSEO/badge.svg?branch=master' alt='Coverage Status' />
+  </a>
+  <a href="https://snyk.io/test/github/a9261/HtmlSEO?targetFile=package.json">
+    <img src="https://snyk.io/test/github/a9261/HtmlSEO/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/a9261/HtmlSEO?targetFile=package.json" style="max-width:100%;">
+  </a>
+</div>
 =============================
 This monkey tool will help detect your html tags or content by pre-define rules.
 Hope for fun
