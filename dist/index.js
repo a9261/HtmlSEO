@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ConfigModel = exports.MonkeyRule = exports.StreamSource = exports.HtmlSource = exports.default = undefined;
 
-var _SeoMonkey = require('./SeoMonkey');
+var _seoMonkey = require('./seoMonkey');
 
-var _SeoMonkey2 = _interopRequireDefault(_SeoMonkey);
+var _seoMonkey2 = _interopRequireDefault(_seoMonkey);
 
 var _htmlSource = require('./Shared/htmlSource');
 
@@ -23,7 +23,7 @@ var _configModel2 = _interopRequireDefault(_configModel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _SeoMonkey2.default;
+exports.default = _seoMonkey2.default;
 exports.HtmlSource = _htmlSource2.default;
 exports.StreamSource = _streamSource2.default;
 exports.MonkeyRule = _configModel.MonkeyRule;
