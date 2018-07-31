@@ -20,10 +20,10 @@
     "start": "webpack --colors && node ./dist/entry.bundle.js",
     "publish": "babel lib -d dist && npm publish",
     "build": "nyc mocha --colors --compilers js:babel-core/register && babel lib -d dist ",
-    "test": "nyc mocha --colors --compilers js:babel-core/register ",
+    "test": "mocha --colors --compilers js:babel-core/register ",
     "watch": "npm-watch test",
     "bench": "babel lib -d dist && babel benchmark/index.js --out-file benchmark/dist.js && node benchmark/dist.js",
-    "coveralls": "mocha --colors --compilers js:babel-core/register -R mocha-lcov-reporter -r jscoverage | coveralls"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
