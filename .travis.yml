@@ -4,7 +4,7 @@ node_js:
 install:
   - npm install -g codecov
   - npm install -g mocha
-  - npm install -g babel
+  - npm install -g babel-cli
 script:
   - npm run build
 cache:
