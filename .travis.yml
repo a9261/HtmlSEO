@@ -5,6 +5,7 @@ install:
   - npm install -g codecov
   - npm install -g mocha
   - npm install -g babel-cli
+  - npm install -g nyc
 script:
   - npm run build
 cache:
