@@ -78,7 +78,7 @@ Usually call **seomonkey.config.json**
 #### Easy example
 ```javascript
     const SeoMonkey = require('seomonkey').default;
-    const HtmlSource = require('seomonkey/dist/Shared/htmlSource').default;
+    const HtmlSource = require('seomonkey').HtmlSource;
 
     // Init your monkey
     const monkey = new SeoMonkey();
@@ -94,7 +94,7 @@ Usually call **seomonkey.config.json**
 You can choose which outputs you want
 ```javascript
     const SeoMonkey = require('seomonkey').default;
-    const HtmlSource = require('seomonkey/dist/Shared/htmlSource').default;
+    const HtmlSource = require('seomonkey').HtmlSource;
 
     const monkey = new SeoMonkey();
     monkey.inputSource = new HtmlSource('test.html');

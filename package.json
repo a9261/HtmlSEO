@@ -19,7 +19,7 @@
   "scripts": {
     "start": "webpack --colors && node ./dist/entry.bundle.js",
     "build": "babel lib -d dist && npm publish",
-    "test": "mocha --colors --compilers js:babel-core/register",
+    "test": "mocha --colors --compilers js:babel-core/register test",
     "watch": "npm-watch test",
     "bench":"babel lib -d dist && babel benchmark/index.js --out-file benchmark/dist.js && node benchmark/dist.js"
   },
