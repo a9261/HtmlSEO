@@ -1,6 +1,6 @@
 {
   "name": "seomonkey",
-  "version": "1.0.12",
+  "version": "1.0.15",
   "description": "SEO,Monkey,TinyTool",
   "main": "./dist/index.js",
   "files": [
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "webpack --colors && node ./dist/entry.bundle.js",
-    "publish": "babel lib -d dist && npm publish",
+    "push": "babel lib -d dist && npm publish",
     "build": "nyc mocha --colors --compilers js:babel-core/register && babel lib -d dist ",
     "test": "mocha --colors --compilers js:babel-core/register ",
     "watch": "npm-watch test",
@@ -68,10 +68,10 @@
     "sinon": "^6.1.4",
     "watch-run": "^1.2.5",
     "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.0.8",
+    "benchmark": "^2.1.4"
   },
   "dependencies": {
-    "benchmark": "^2.1.4",
     "find-config": "^1.0.0",
     "jsdom": "^11.11.0"
   }
