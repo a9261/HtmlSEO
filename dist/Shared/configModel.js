@@ -49,6 +49,32 @@ var ConfigModel = function () {
   }
 
   _createClass(ConfigModel, [{
+    key: 'addRule',
+    value: function addRule() {
+      var rule = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (rule == null) {
+        throw new Error('Rule cannot be null');
+      }
+      if (rule.constructor !== MonkeyRule) {
+        throw new Error('Parameter should be MonkeyRule');
+      }
+      rule.valid();
+      this.MonkeyRules.push(rule);
+    }
+  }, {
+    key: 'clearAllRule',
+    value: function clearAllRule() {
+      this.MonkeyRules = [];
+    }
+  }, {
+    key: 'removeRuleAt',
+    value: function removeRuleAt(index) {
+      if (!(index - 1) < this.MonkeyRules.length) {
+        this.MonkeyRules.splice(index - 1, 1);
+      }
+    }
+  }, {
     key: _getRules,
     value: function value(rules) {
       var result = rules.map(function (item) {

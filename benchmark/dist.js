@@ -38,7 +38,7 @@ suite.add('Console output test', {
   'fn': function fn(deferred) {
     var filePath = (0, _findConfig2.default)('test.html', { dir: '/test' });
     monkey.inputSource = new _dist.HtmlSource(filePath);
-    monkey.saveResultAsFile('demo.txt').then(function (res) {
+    monkey.saveResultToFile('demo.txt').then(function (res) {
       deferred.resolve();
     }).catch(function (err) {
       throw new Error(err);
@@ -50,7 +50,7 @@ suite.add('Console output test', {
     var filePath = (0, _findConfig2.default)('test.html', { dir: '/test' });
     monkey.inputSource = new _dist.HtmlSource(filePath);
     var writerStream = _fs2.default.createWriteStream('output.txt');
-    monkey.saveResultAsStream(writerStream).then(function (res) {
+    monkey.saveResultToStream(writerStream).then(function (res) {
       deferred.resolve();
     }).catch(function (err) {
       throw new Error(err);

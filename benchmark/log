@@ -10,3 +10,9 @@ Console output test x 210 ops/sec ±3.83% (69 runs sampled)
 saveResultAsFile test x 265 ops/sec ±3.51% (71 runs sampled)
 saveResultAsStream test x 270 ops/sec ±4.15% (73 runs sampled)
 Fastest is saveResultAsStream test
+
+#Change defaultDetect only return fullMsg
+Console output test x 211 ops/sec ±14.81% (64 runs sampled)
+saveResultAsFile test x 295 ops/sec ±3.08% (78 runs sampled)
+saveResultAsStream test x 290 ops/sec ±5.67% (68 runs sampled)
+Fastest is saveResultAsFile test,saveResultAsStream test

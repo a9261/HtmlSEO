@@ -55,8 +55,8 @@ var SeoMonkey = function () {
       });
     }
   }, {
-    key: 'saveResultAsStream',
-    value: function saveResultAsStream() {
+    key: 'saveResultToStream',
+    value: function saveResultToStream() {
       var targetStream = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
       if (targetStream == null) {
@@ -84,8 +84,13 @@ var SeoMonkey = function () {
       });
     }
   }, {
-    key: 'saveResultAsFile',
-    value: function saveResultAsFile(outputPath) {
+    key: 'saveResultToFile',
+    value: function saveResultToFile() {
+      var outputPath = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (outputPath == null) {
+        throw new Error('outputPath cannot null');
+      }
       return this[_detect]().then(function (resultMsg) {
         var inputMsg = '';
         resultMsg.forEach(function (msg) {
@@ -114,8 +119,11 @@ var SeoMonkey = function () {
     value: function value() {
       this[_checkSourceIsReady]();
       var dr = new _detectDr2.default(this.config);
-      var result = dr.detect(this.inputSource);
-      return result;
+      var result1 = dr.detect(this.inputSource);
+      var result = new Promise(function (resolve) {
+        resolve([]);
+      });
+      return result1;
     }
   }, {
     key: _checkSourceIsReady,

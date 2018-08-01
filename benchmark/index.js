@@ -23,7 +23,7 @@ suite.add('Console output test',{
   'fn': function (deferred) {
       let filePath = cfg('test.html', {dir: '/test'})
       monkey.inputSource = new HtmlSource(filePath)
-      monkey.saveResultAsFile('demo.txt')
+      monkey.saveResultToFile('demo.txt')
       .then((res) => {
         deferred.resolve();
       })
@@ -36,7 +36,7 @@ suite.add('Console output test',{
       let filePath = cfg('test.html', {dir: '/test'})
       monkey.inputSource = new HtmlSource(filePath)
       let writerStream = fs.createWriteStream('output.txt')
-      monkey.saveResultAsStream(writerStream)
+      monkey.saveResultToStream(writerStream)
       .then((res) => {
         deferred.resolve();
       })
