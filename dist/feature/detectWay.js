@@ -5,17 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.defaultDetect = defaultDetect;
 
-var _jsdom = require('jsdom');
-
-var _jsdom2 = _interopRequireDefault(_jsdom);
-
 var _cheerio = require('cheerio');
 
 var _cheerio2 = _interopRequireDefault(_cheerio);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var JSDOM = _jsdom2.default.JSDOM;
 function defaultDetect(config) {
   var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -24,7 +19,6 @@ function defaultDetect(config) {
   }
 
   var processResult = source.getSourceData().then(function (data) {
-    // const doc = new JSDOM(data).window.document
     var doc = _cheerio2.default.load(data);
     var promises = config.MonkeyRules.map(function (rule) {
       return new Promise(function (resolve) {
@@ -36,9 +30,6 @@ function defaultDetect(config) {
   return processResult;
 }
 function getDetectMsg(doc, rule, config) {
-  // let detectNum = doc
-  //   .querySelectorAll(rule.SearchRule)
-  //   .length
   var detectNum = doc(rule.SearchRule).get().length;
   var fullMsg = rule.DetectedText.length > 0 ? rule.DetectedText : config.DetectedText;
   fullMsg = fullMsg.replace('{RuleName}', rule.RuleName).replace('{Num}', detectNum).replace('{Minimum}', rule.Minimum).replace('{Maximum}', rule.Maximum);
