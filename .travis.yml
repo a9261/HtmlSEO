@@ -7,8 +7,8 @@ install:
   - npm install -g nyc
   - npm install -g coveralls 
   - npm install -g mocha-lcov-reporter 
-  - npm install -g cheerio
 script:
+  - npm install
   - npm run build
   - npm run coveralls
 cache:
