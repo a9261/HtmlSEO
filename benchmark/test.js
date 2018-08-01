@@ -7,7 +7,20 @@ function t (){
         resolve();
     })
 }
+function b (){
+    return new Promise(function(resolve){
+        console.log('MonkeyRule1 are match  1 of elements,Mini:1 Max:1');
+        resolve();
+    })
+}
 suite.add('Console output test',{
+    'defer':true,
+    'fn':function(deffered){
+        t().then(()=>{
+            deffered.resolve();
+        })
+    }
+}).add('Console output test',{
     'defer':true,
     'fn':function(deffered){
         t().then(()=>{

@@ -21,29 +21,18 @@ function defaultDetect(config) {
 
   var processResult = source.getSourceData().then(function (data) {
     var doc = new JSDOM(data).window.document;
-    var msg = [];
     var promises = config.MonkeyRules.map(function (rule) {
-      // return new Promise(function (resolve) {
-      //   let detectNum = doc
-      //     .querySelectorAll(rule.SearchRule)
-      //     .length
-      //   let fullMsg = rule.DetectedText.length > 0
-      //     ? rule.DetectedText
-      //     : config.DetectedText
-      //   fullMsg = fullMsg
-      //     .replace('{RuleName}', rule.RuleName)
-      //     .replace('{Num}', detectNum)
-      //     .replace('{Minimum}', rule.Minimum)
-      //     .replace('{Maximum}', rule.Maximum)
-      //   if (detectNum < rule.Minimum || detectNum > rule.Maximum) {
-      //     fullMsg = '[Warning] ' + fullMsg
-      //   }
-      //   resolve(fullMsg)
-      // }) // end Promise
-      msg.push(getDetectMsg(doc, rule, config));
+      return new Promise(function (resolve) {
+        var detectNum = doc.querySelectorAll(rule.SearchRule).length;
+        var fullMsg = rule.DetectedText.length > 0 ? rule.DetectedText : config.DetectedText;
+        fullMsg = fullMsg.replace('{RuleName}', rule.RuleName).replace('{Num}', detectNum).replace('{Minimum}', rule.Minimum).replace('{Maximum}', rule.Maximum);
+        if (detectNum < rule.Minimum || detectNum > rule.Maximum) {
+          fullMsg = '[Warning] ' + fullMsg;
+        }
+        resolve(fullMsg);
+      }); // end Promise
     });
-    return msg;
-    // return (Promise.all(promises))
+    return promises;
   }); // end processResult
   return processResult;
 }
