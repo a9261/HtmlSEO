@@ -11,6 +11,7 @@ var _cheerio2 = _interopRequireDefault(_cheerio);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// const cheerio = require('cheerio')
 function defaultDetect(config) {
   var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 

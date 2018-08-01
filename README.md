@@ -18,7 +18,13 @@ SeoMonkey
 
 This monkey tool will help detect your html tags or content by pre-define rules.
 Hope for fun
+## Tips
+If you use VsCode our package has typing file. 
+Makesure you can develop more easy, You can add //@ts-check on your js file
+Learn more [here](https://github.com/Microsoft/TypeScript/wiki/Type-Checking-JavaScript-Files)
 
+Demo
+<img src='https://i.imgur.com/ISRVYPo.gif' alt='VsCode typing Demo' />
 ## Prerequisites
 Makesure you're use NodeJs version 8 and above
 You can download from 
