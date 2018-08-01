@@ -22,6 +22,9 @@ Hope for fun
 If you use VsCode our package has typing file. 
 Makesure you can develop more easy, You can add //@ts-check on your js file
 Learn more [here](https://github.com/Microsoft/TypeScript/wiki/Type-Checking-JavaScript-Files)
+## Important
+If you want default class can use typing file to checking type.
+You need change require('seomonkey).default to require('seomonkey).SeoMonkey
 
 Demo
 <img src='https://i.imgur.com/ISRVYPo.gif' alt='VsCode typing Demo' />
