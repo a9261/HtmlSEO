@@ -106,9 +106,10 @@ Usually call **seomonkey.config.json**
 #### Input Source Definition
 - `HtmlSource`  : This source is let you can input html file path as source.
 - `StreamSource`: This source is let you can input custom stream  as source.
-#### Output
+#### HtmlSource example
 You can choose which outputs you want
 ```javascript
+    const fs = require('fs')
     const SeoMonkey = require('seomonkey').default;
     const HtmlSource = require('seomonkey').HtmlSource;
 
@@ -117,8 +118,68 @@ You can choose which outputs you want
     // Print result to console
     monkey.saveResultToConsole();
     // Save result as stream
-    monkey.saveResultAsStream();
+    let writerStream = fs.createWriteStream('output.txt');
+    monkey.saveResultToStream(writerStream);
     // Save result to file  
-    monkey.saveResultAsFile();
+    monkey.saveResultToFile('demo.txt');
 ```
+#### StreamSource example
+```javascript
+    const fs = require('fs')
+    const SeoMonkey = require('seomonkey').default;
+    const StreamSource = require('seomonkey').StreamSource;
 
+    const monkey = new SeoMonkey();
+    const readableStream = fs.createReadStream(filePath);
+    let stream =   new StreamSource(readableStream);
+    monkey.inputSource = stream;
+    // Print result to console
+    monkey.saveResultToConsole();
+    // Save result as stream
+    let writerStream = fs.createWriteStream('output.txt');
+    monkey.saveResultToStream(writerStream);
+    // Save result to file  
+    monkey.saveResultToFile('demo.txt');
+```
+#### Change Rule in code example
+Add new rule
+```javascript
+    const fs = require('fs')
+    const SeoMonkey = require('seomonkey').default;
+    const HtmlSource = require('seomonkey').HtmlSource;
+
+    const monkey = new SeoMonkey();
+    // Add new detect rule (The rule will push to the end of rules)
+    let rule = new MonkeyRule();
+    rule.DetectedText='Hello';
+    rule.Maximum=1;
+    rule.Minimum=1;
+    rule.RuleName='This is new Rule';
+    rule.SearchRule='head'
+    monkey.config.addRule(rule);
+    monkey.inputSource = new HtmlSource('test.html');
+    // Print result to console
+    monkey.saveResultToConsole();
+```
+clearAllRule
+```javascript
+    const fs = require('fs')
+    const SeoMonkey = require('seomonkey').default;
+    const HtmlSource = require('seomonkey').HtmlSource;
+    const monkey = new SeoMonkey();
+    monkey.config.clearAllRule();
+    monkey.inputSource = new HtmlSource('test.html');
+    // will not export any result to console. because rules is empty
+    monkey.saveResultToConsole();
+```
+removeRuleAt
+```javascript
+    const fs = require('fs')
+    const SeoMonkey = require('seomonkey').default;
+    const HtmlSource = require('seomonkey').HtmlSource;
+    const monkey = new SeoMonkey();
+    monkey.config.removeRuleAt(4);
+    monkey.inputSource = new HtmlSource('test.html');
+    // MonkeyRule4 is removed ,So detected result and output will not include 
+    monkey.saveResultToConsole();
+```
