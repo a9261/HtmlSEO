@@ -1,6 +1,6 @@
 {
   "name": "seomonkey",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "SEO,Monkey,TinyTool",
   "main": "./dist/index.js",
   "files": [
