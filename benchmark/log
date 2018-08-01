@@ -16,3 +16,16 @@ Console output test x 211 ops/sec ±14.81% (64 runs sampled)
 saveResultAsFile test x 295 ops/sec ±3.08% (78 runs sampled)
 saveResultAsStream test x 290 ops/sec ±5.67% (68 runs sampled)
 Fastest is saveResultAsFile test,saveResultAsStream test
+
+#Move Promise.all to outside
+Console output test x 239 ops/sec ±3.79% (69 runs sampled)
+saveResultAsFile test x 291 ops/sec ±2.93% (77 runs sampled)
+saveResultAsStream test x 293 ops/sec ±4.20% (73 runs sampled)
+Fastest is saveResultAsFile test
+
+#Change dom package to cheerio
+ref:https://cnodejs.org/topic/5203a71844e76d216a727d2e
+Console output test x 492 ops/sec ±4.12% (70 runs sampled)
+saveResultAsFile test x 592 ops/sec ±6.11% (73 runs sampled)
+saveResultAsStream test x 670 ops/sec ±7.76% (73 runs sampled)
+Fastest is saveResultAsStream test

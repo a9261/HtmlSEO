@@ -72,7 +72,7 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
-    "find-config": "^1.0.0",
-    "jsdom": "^11.11.0"
+    "cheerio": "^1.0.0-rc.2",
+    "find-config": "^1.0.0"
   }
 }

@@ -120,9 +120,6 @@ var SeoMonkey = function () {
       this[_checkSourceIsReady]();
       var dr = new _detectDr2.default(this.config);
       var result = dr.detect(this.inputSource);
-      // let result = new Promise(resolve => {
-      //   resolve([])
-      // })
       return result.then(function (allPromise) {
         return Promise.all(allPromise);
       });
